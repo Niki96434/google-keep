@@ -7,8 +7,11 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "build": "tsx",
-    "start": "node core/server.js",
-    "dev": "tsx --watch core/server.ts"
+    "start": "node src/core/server.js",
+    "dev": "tsx --watch src/core/server.ts",
+    "lint": "eslint .",
+    "lint:fix": "eslint . --fix",
+    "format": "prettier . --write"
   },
   "keywords": [],
   "author": "",
