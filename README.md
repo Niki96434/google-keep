@@ -2,6 +2,17 @@
 
 ## Конечные точки
 
+### Тип сущности
+
+```
+export type Note = {
+  id: string;
+  user_id: string;
+  title: string;
+  content: string;
+};
+```
+
 ### GET /notes
 
 Метод получения всех заметок
