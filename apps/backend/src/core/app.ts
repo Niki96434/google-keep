@@ -1,3 +1,5 @@
 import express from 'express'
 
-export const server = express()
+export const app = express()
+
+app.use(express.json())
