@@ -66,3 +66,17 @@ export type NoteCreateIn = Pick<Note, "user_id" | "title" | "content">;
 ```
 export type NoteCreateOut = Note;
 ```
+
+## Миграции
+
+С помощью cli-команд перед запуском приложения или тестов:
+
+```
+npx drizzle-kit migrate
+```
+
+## Запуск интеграционных тестов проверки API с тестовой БД
+
+```
+npm run test:api
+```

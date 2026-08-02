@@ -1,8 +1,8 @@
+import 'dotenv/config'
 import dotenv from 'dotenv'
 import path from 'path'
 import { Pool } from 'pg'
 import { drizzle } from 'drizzle-orm/node-postgres'
-import { migrate } from 'drizzle-orm/node-postgres/migrator'
 
 dotenv.config({ path: path.resolve(process.cwd(), './../../../.env') })
 
@@ -16,5 +16,3 @@ pool.on('error', (_err: Error) => {
 })
 
 export const db = drizzle({ client: pool })
-
-await migrate(db, { migrationsFolder: './../../../migrations' })

@@ -1,5 +1,17 @@
 import { app } from './app'
+import path from 'path'
+import { migrate } from 'drizzle-orm/node-postgres/migrator'
+import { db } from './core/db/index'
 
 const port = Number(process.env.PORT) || 3000
 
-const server = app.listen(port)
+const bootstrap = async () => {
+  const migrationsFolder = path.resolve(process.cwd(), 'migrations')
+  await migrate(db, { migrationsFolder })
+  app.listen(port)
+}
+
+bootstrap().catch((err: Error) => {
+  console.log(err)
+  process.exit(1)
+})
