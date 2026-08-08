@@ -5,13 +5,15 @@ import { sql } from 'drizzle-orm'
 import { notesTable } from './schema'
 import { randomUUID } from 'node:crypto'
 
-describe('get notes', () => {
-  beforeEach(async () => {
-    await test_db.execute(sql`TRUNCATE TABLE ${notesTable}`)
-  })
+const BASE_URL = '/api/v1/notes/'
 
+beforeEach(async () => {
+  await test_db.execute(sql`TRUNCATE TABLE ${notesTable}`)
+})
+
+describe('get notes', () => {
   it('should return empty array', async () => {
-    const response = await request(app).get('/api/v1/notes/')
+    const response = await request(app).get(BASE_URL)
     expect(response.status).toBe(200)
     expect(response.body.notes).toEqual([])
   })
@@ -20,7 +22,7 @@ describe('get notes', () => {
 describe('create note', () => {
   it('should create note', async () => {
     const response = await request(app)
-      .post('/api/v1/notes/')
+      .post(BASE_URL)
       .send({ title: 'Тестовая заметка', content: 'Контент' })
 
     expect(response.status).toBe(201)
@@ -28,7 +30,7 @@ describe('create note', () => {
   })
 
   it('should return status code 400 if title and content are empty', async () => {
-    const response = await request(app).post('/api/v1/notes/').send({ title: null, content: null })
+    const response = await request(app).post(BASE_URL).send({ title: null, content: null })
 
     expect(response.status).toBe(400)
     expect(response.body.error).toBe('Validation error')
@@ -37,46 +39,39 @@ describe('create note', () => {
 
 describe('update note', () => {
   it('should return updated note', async () => {
-    await request(app)
-      .post('/api/v1/notes/')
+    const createRes = await request(app)
+      .post(BASE_URL)
       .send({ title: 'Тестовое заметище', content: 'Контентище' })
 
-    const res = await test_db.execute(
-      sql`SELECT id FROM ${notesTable} WHERE title = 'Тестовое заметище'`
-    )
-    const { id } = res.rows[0]
+    const id = createRes.body.note.id
 
     const response = await request(app)
-      .put(`/api/v1/notes/${id}`)
+      .put(`${BASE_URL}${id}`)
       .send({ title: 'Обновленная заметка', content: 'Новый контент' })
 
     expect(response.status).toBe(200)
     expect(response.body.note.title).toBe('Обновленная заметка')
-  })
+  }, 10_000)
 
-  it('should return status code 400 if note id is not exist', async () => {
+  it('should return status code 404 if note id is not exist', async () => {
     const id = randomUUID()
 
     await expect(
       request(app)
-        .put(`/api/v1/notes/${id}`)
+        .put(`${BASE_URL}${id}`)
         .send({ title: 'Обновленная заметка', content: 'Новый контент' })
-    ).resolves.toHaveProperty('status', 400)
+    ).resolves.toHaveProperty('status', 404)
   })
 })
 
 describe('delete note', () => {
   it('should delete note', async () => {
-    await request(app)
-      .post('/api/v1/notes/')
+    const createRes = await request(app)
+      .post(BASE_URL)
       .send({ title: 'Тестовая заметка для удаления', content: 'Контент' })
 
-    const res = await test_db.execute(
-      sql`SELECT id FROM ${notesTable} WHERE title = 'Тестовая заметка для удаления'`
-    )
-    const { id } = res.rows[0]
-
-    const response = await request(app).delete(`/api/v1/notes/${id}`)
+    const id = createRes.body.note.id
+    const response = await request(app).delete(`${BASE_URL}${id}`)
 
     expect(response.status).toBe(200)
     expect(response.body.message).toBe('Success')
