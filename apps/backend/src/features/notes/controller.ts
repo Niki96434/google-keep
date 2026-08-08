@@ -42,7 +42,7 @@ export function controller({ repo }: RepositoryType) {
     const note = await updateNoteFromDB(noteId, noteData)
 
     if (!note) {
-      return res.status(400).json({ error: 'Bad request' })
+      return res.status(400).json({ error: 'Note is not exist' })
     }
 
     return res.status(200).json({ note })

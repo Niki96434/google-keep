@@ -6,7 +6,7 @@ export const NoteCreateInSchema = z
     content: z.string().optional(),
   })
   .refine((data) => data.title !== undefined || data.content !== undefined, {
-    message: 'At least one field must be specified: title or content',
+    error: 'At least one field must be specified: title or content',
   })
 
 export const NotePartialUpdateInSchema = NoteCreateInSchema
@@ -17,5 +17,5 @@ export const NoteUpdateInSchema = z.object({
 })
 
 export const NoteIdSchema = z.object({
-  id: z.uuidv7(),
+  id: z.string(),
 })
