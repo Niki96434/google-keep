@@ -56,12 +56,12 @@ describe('update note', () => {
 
   it('should return status code 400 if note id is not exist', async () => {
     const id = randomUUID()
-    // TODO: исправить тест на sad path
-    expect(
+
+    await expect(
       request(app)
         .put(`/api/v1/notes/${id}`)
         .send({ title: 'Обновленная заметка', content: 'Новый контент' })
-    ).toBe(400)
+    ).resolves.toHaveProperty('status', 400)
   })
 })
 
