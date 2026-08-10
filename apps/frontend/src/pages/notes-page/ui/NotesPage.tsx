@@ -1,4 +1,4 @@
-import { Input } from '@/shared/ui'
+import { Input, Button } from '@/shared/ui'
 import { useRef, useState } from 'react'
 import { useOnClickOutside } from './../model/useOnClickOutside'
 
@@ -13,10 +13,19 @@ function NotesPage() {
   useOnClickOutside({ formRef, handler })
   return (
     <div ref={formRef}>
-      <form>
-        {isOpenForm && <Input placeholder="Название" />}
-        <Input placeholder="Заметка..." onClick={() => setOpenForm(true)} />
-      </form>
+      {isOpenForm === false && <Input placeholder="Заметка..." onClick={() => setOpenForm(true)} />}
+      {isOpenForm && (
+        <form>
+          <Input placeholder="Название" />
+          <Input placeholder="Заметка..." />
+          <Button
+            size="lg"
+            variant="ghost"
+            onClick={() => setOpenForm(false)}
+            children={'Закрыть'}
+          />
+        </form>
+      )}
     </div>
   )
 }
