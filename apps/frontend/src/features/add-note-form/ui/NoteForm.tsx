@@ -6,12 +6,16 @@ import { useForm, Controller } from 'react-hook-form'
 import { zodResolver } from '@hookform/resolvers/zod'
 import { Field } from '@/shared/ui'
 import * as z from 'zod'
+import { useCreateNoteMutation } from '../api/useCreateNoteMutation'
 
 function NoteForm() {
   const [isOpenForm, setOpenForm] = useState<boolean>(false)
   const formRef = useRef<HTMLDivElement | null>(null)
 
+  const mutation = useCreateNoteMutation()
+
   const handler = () => {
+    handleSubmit(handleNext)
     setOpenForm(false)
   }
 
@@ -24,7 +28,7 @@ function NoteForm() {
   })
 
   const handleNext = (data: z.infer<typeof NoteCreateInSchema>) => {
-    alert(data.title)
+    mutation.mutate({ title: data?.title || '', content: data?.content || '' })
     setOpenForm(false)
   }
 
