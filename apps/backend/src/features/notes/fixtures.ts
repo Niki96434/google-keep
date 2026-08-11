@@ -1,4 +1,4 @@
-import type { NotesGetOut } from './../../../../../packages/shared/types'
+import type { NotesGetOut } from './../../../../../packages/shared/notes/types'
 
 export default function getMockNotes(): NotesGetOut {
   return {

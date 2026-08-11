@@ -1,11 +1,7 @@
-import { NotesPage } from '@/pages/notes-page/ui/NotesPage'
+import { NoteForm } from '@/features/add-note-form/ui/NoteForm'
 
 function App() {
-  return (
-    <>
-      <NotesPage />
-    </>
-  )
+  return <NoteForm />
 }
 
 export { App }
