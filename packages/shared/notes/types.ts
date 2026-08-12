@@ -8,7 +8,7 @@ export type Note = {
 export type NotesGetOut = {
   notes: Note[];
 };
-export type NoteCreateIn = Pick<Note, "user_id" | "title" | "content">;
+export type NoteCreateIn = Pick<Note, "title" | "content">;
 
 export type NoteCreateOut = Note;
 

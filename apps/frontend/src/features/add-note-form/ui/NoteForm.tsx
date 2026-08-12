@@ -12,14 +12,11 @@ function NoteForm() {
   const [isOpenForm, setOpenForm] = useState<boolean>(false)
   const formRef = useRef<HTMLDivElement | null>(null)
 
-  const mutation = useCreateNoteMutation()
-
   const handler = () => {
-    handleSubmit(handleNext)
     setOpenForm(false)
   }
 
-  const { handleSubmit, control } = useForm<z.infer<typeof NoteCreateInSchema>>({
+  const { handleSubmit, control, getValues } = useForm<z.infer<typeof NoteCreateInSchema>>({
     resolver: zodResolver(NoteCreateInSchema),
     defaultValues: {
       title: '',
@@ -27,12 +24,14 @@ function NoteForm() {
     },
   })
 
+  const mutation = useCreateNoteMutation()
+
   const handleNext = (data: z.infer<typeof NoteCreateInSchema>) => {
     mutation.mutate({ title: data?.title || '', content: data?.content || '' })
     setOpenForm(false)
   }
 
-  useOnClickOutside({ formRef, handler })
+  useOnClickOutside({ formRef, handler, getValues })
 
   return (
     <div ref={formRef} className="w-full max-w-150 mx-auto my-8 px-4 text-left">
@@ -46,10 +45,7 @@ function NoteForm() {
         </div>
       )}
       {isOpenForm && (
-        <form
-          onSubmit={handleSubmit(handleNext)}
-          className="flex flex-col rounded-2xl border border-border/80 bg-card shadow-lg p-3 gap-1 transition-all"
-        >
+        <form className="flex flex-col rounded-2xl border border-border/80 bg-card shadow-lg p-3 gap-1 transition-all">
           <Controller
             control={control}
             name="title"
