@@ -19,10 +19,14 @@ export function useOnClickOutside({ formRef, handler, getValues }: OnClickOutsid
       if (!formRef.current || formRef.current.contains(event.target as Node)) {
         return
       }
-      alert('нажали на все кроме формы')
       const values = getValues()
-      mutation.mutate({ title: values?.title || '', content: values?.content || '' })
 
+      if (values.title?.trim() === '' && values.content?.trim() === '') {
+        handler()
+        return
+      }
+
+      mutation.mutate({ title: values?.title || '', content: values?.content || '' })
       handler()
     }
     document.addEventListener('mousedown', listener)

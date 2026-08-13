@@ -1,5 +1,5 @@
 import { Input, Button } from '@/shared/ui'
-import { useRef, useState } from 'react'
+import { useEffect, useRef, useState } from 'react'
 import { useOnClickOutside } from '../model/useOnClickOutside'
 import { NoteCreateInSchema } from './../../../../../../packages/shared/notes/validationSchemas'
 import { useForm, Controller } from 'react-hook-form'
@@ -16,7 +16,13 @@ function NoteForm() {
     setOpenForm(false)
   }
 
-  const { handleSubmit, control, getValues } = useForm<z.infer<typeof NoteCreateInSchema>>({
+  const {
+    handleSubmit,
+    control,
+    getValues,
+    formState: { isSubmitSuccessful },
+    reset,
+  } = useForm<z.infer<typeof NoteCreateInSchema>>({
     resolver: zodResolver(NoteCreateInSchema),
     defaultValues: {
       title: '',
@@ -27,11 +33,19 @@ function NoteForm() {
   const mutation = useCreateNoteMutation()
 
   const handleNext = (data: z.infer<typeof NoteCreateInSchema>) => {
-    mutation.mutate({ title: data?.title || '', content: data?.content || '' })
-    setOpenForm(false)
+    if (data.title?.trim() !== '' || data.content?.trim() !== '') {
+      mutation.mutate({ title: data?.title || '', content: data?.content || '' })
+    }
+    handler()
   }
 
   useOnClickOutside({ formRef, handler, getValues })
+
+  useEffect(() => {
+    if (isSubmitSuccessful) {
+      reset()
+    }
+  }, [isSubmitSuccessful, reset])
 
   return (
     <div ref={formRef} className="w-full max-w-150 mx-auto my-8 px-4 text-left">
