@@ -1,6 +1,6 @@
 import { useMutation } from '@tanstack/react-query'
 import { axiosInstance } from '@/shared/api'
-import type { NoteCreateIn, NoteCreateOut } from '@/../../packages/shared/notes/types'
+import type { NoteCreateIn, NoteCreateOut } from '../../../../../packages/shared/notes/types'
 
 export function useCreateNoteMutation() {
   const mutation = useMutation({
