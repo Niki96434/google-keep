@@ -1,42 +1,9 @@
 import { Button, Textarea } from '@/shared/ui'
-import { useRef, useState } from 'react'
-import { useOnClickOutside } from '../model/useOnClickOutside'
-import { NoteCreateInSchema } from '@shared/notes/validationSchemas'
-import { useForm, Controller } from 'react-hook-form'
-import { zodResolver } from '@hookform/resolvers/zod'
-import * as z from 'zod'
-import { useCreateNoteMutation } from '../api/useCreateNoteMutation'
+import { Controller } from 'react-hook-form'
+import { useNoteFormLogic } from './../model/useNoteFormLogic'
 
 function NoteForm() {
-  const [isOpenForm, setOpenForm] = useState<boolean>(false)
-  const formRef = useRef<HTMLDivElement | null>(null)
-
-  const { handleSubmit, control, getValues, reset } = useForm<z.infer<typeof NoteCreateInSchema>>({
-    resolver: zodResolver(NoteCreateInSchema),
-    defaultValues: {
-      title: '',
-      content: '',
-    },
-  })
-
-  const closeForm = () => {
-    setOpenForm(false)
-  }
-
-  const mutation = useCreateNoteMutation()
-
-  const handleNext = () => {
-    const data = getValues()
-    if (data.title?.trim() !== '' || data.content?.trim() !== '') {
-      mutation.mutate({ title: data?.title || '', content: data?.content || '' })
-      if (mutation.isSuccess) {
-        reset()
-      }
-    }
-    closeForm()
-  }
-
-  useOnClickOutside({ formRef, handleNext })
+  const { formRef, isOpenForm, openForm, handleSubmit, onSubmit, control } = useNoteFormLogic()
 
   return (
     <div ref={formRef} className="w-full max-w-150 mx-auto my-8 px-4 text-left">
@@ -44,14 +11,14 @@ function NoteForm() {
         <div className="rounded-2xl border border-border/80 bg-card shadow-sm hover:shadow-md transition-shadow p-1 cursor-pointer">
           <Textarea
             placeholder="Заметка..."
-            onClick={() => setOpenForm(true)}
+            onClick={openForm}
             className="border-none bg-transparent shadow-none focus-visible:ring-0 text-base font-medium px-4 py-2.5 cursor-pointer placeholder:text-muted-foreground/70"
           />
         </div>
       )}
       {isOpenForm && (
         <form
-          onSubmit={handleSubmit(handleNext)}
+          onSubmit={handleSubmit(onSubmit)}
           className="flex flex-col rounded-2xl border border-border/80 bg-card shadow-lg p-3 gap-1 transition-all"
         >
           <Controller
