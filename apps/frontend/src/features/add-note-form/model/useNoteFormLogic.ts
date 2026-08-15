@@ -29,20 +29,18 @@ export function useNoteFormLogic() {
   const mutation = useCreateNoteMutation()
 
   const onSubmit = useCallback(() => {
-    if (isOpenForm) {
-      const data = getValues()
-      if (data.title?.trim() !== '' || data.content?.trim() !== '') {
-        mutation.mutate(
-          { title: data?.title || '', content: data?.content || '' },
-          {
-            onSuccess: () => reset(),
-          }
-        )
-      }
+    const data = getValues()
+    if (data.title?.trim() !== '' || data.content?.trim() !== '') {
+      mutation.mutate(
+        { title: data?.title || '', content: data?.content || '' },
+        {
+          onSuccess: () => reset(),
+        }
+      )
     }
 
     closeForm()
-  }, [isOpenForm, getValues, mutation, reset])
+  }, [getValues, mutation, reset])
 
   useOnClickOutside({ formRef, onSubmit, isOpenForm })
 

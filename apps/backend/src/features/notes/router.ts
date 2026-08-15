@@ -8,7 +8,7 @@ import {
   NoteUpdateInSchema,
   NoteIdSchema,
   NotePartialUpdateInSchema,
-} from '../../../../../packages/shared/notes/validationSchemas'
+} from '@shared/notes/validationSchemas'
 
 export const notesRouter = express.Router()
 

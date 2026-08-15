@@ -12,17 +12,21 @@ export function useOnClickOutside({ formRef, onSubmit, isOpenForm }: OnClickOuts
   const onSubmitRef = useRef(onSubmit)
 
   useEffect(() => {
+    onSubmitRef.current = onSubmit
+  }, [onSubmit])
+
+  useEffect(() => {
     const listener = (event: EventType) => {
       if (!formRef.current || formRef.current.contains(event.target as Node)) {
         return
       }
-      if (isOpenForm) {
-        onSubmitRef.current()
-      }
+      onSubmitRef.current()
     }
-    document.addEventListener('mousedown', listener)
-    return () => {
-      document.removeEventListener('mousedown', listener)
+    if (isOpenForm) {
+      document.addEventListener('mousedown', listener)
+      return () => {
+        document.removeEventListener('mousedown', listener)
+      }
     }
   }, [formRef, isOpenForm])
 }

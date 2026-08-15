@@ -5,7 +5,7 @@ import type {
   Note,
   NoteUpdateOut,
   NoteUpdateIn,
-} from '../../../../../packages/shared/notes/types'
+} from '@shared/notes/types'
 
 interface RepositoryType {
   repo: {
