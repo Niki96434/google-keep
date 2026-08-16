@@ -1,6 +1,6 @@
 import { http, HttpResponse } from 'msw'
 
-const url = `http://localhost:${import.meta.env.SERVER_PORT}`
+const url = `http://localhost:${import.meta.env.VITE_SERVER_PORT}`
 export const handlers = [
   http.get(`${url}/api/v1/notes`, () => {
     return HttpResponse.json({
