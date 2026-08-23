@@ -1,7 +1,7 @@
-import { NoteForm } from '@/features/add-note-form/ui/NoteForm'
+import { HomePage } from '@/pages/ui/HomePage'
 
 function App() {
-  return <NoteForm />
+  return <HomePage />
 }
 
 export { App }
