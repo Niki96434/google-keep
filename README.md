@@ -16,6 +16,7 @@ MVP веб-приложение с виртуальным питомцем, ос
 Пользовательский путь: [docs/RULES.md](https://github.com/Niki96434/google-keep/blob/front/app/docs/RULES.md)
 
 ## Перечень используемых технологий (с их обоснованием)
+
 - React 19, Typescript, Vite, Eslint, Prettier, Vitest, RTL, RTQuery, Zod
 - Express.js, Supertest, Drizzle ORM
 - PostgreSQL 18
@@ -43,4 +44,9 @@ MVP веб-приложение с виртуальным питомцем, ос
 
 ## Скриншоты
 
-### Главный экран десктопного и мобильного экранов
+### Главный экран
+
+![Десктоп](app/docs/screenshots/pigkeep-dashboard.pdf)
+![Мобильный](app/docs/screenshots/pigkeep-mobile.pdf)
+
+### Модальное окно сводки за день
