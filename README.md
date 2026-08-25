@@ -46,7 +46,7 @@ MVP веб-приложение с виртуальным питомцем, ос
 
 ### Главный экран
 
-![Десктоп](app/docs/screenshots/pigkeep-dashboard.pdf)
-![Мобильный](app/docs/screenshots/pigkeep-mobile.pdf)
+![Десктоп](./app/docs/screenshots/pigkeep-dashboard.pdf)\
+![Мобильный](./app/docs/screenshots/pigkeep-mobile.pdf)
 
 ### Модальное окно сводки за день
