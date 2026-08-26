@@ -27,6 +27,21 @@
   background-color: #ffffff;
 }
 
+.menu {
+  opacity: 0;
+  visibility: hidden;
+  width: 20px;
+  aspect-ratio: 1/1;
+}
+
+.container:hover .menu {
+  opacity: 1;
+  visibility: visible;
+  transition:
+    opacity 0.6s,
+    visibility 0.6s;
+}
+
 /* стили для планшетной версии */
 @media (width >= 768px) {
   .container {
