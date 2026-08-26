@@ -9,14 +9,18 @@
 }
 
 :root {
-  --color-primary: pink;
-  --text-primary: black;
-  --border-radius: 6px;
-  --border: 1px solid gray;
-  --box-shadow: 1px 2px 3px;
-  --padding: 2px;
-  --margin: 3px;
   --font-primary: 'Rubik', sans-serif;
+  --text-primary: #2d2a26;
+  --text-advanced: #6b655f;
+  --border: 1px solid #e8e2d9;
+  --box-shadow: 3px 5px 3px rgb(173, 173, 173);
+  --background-color: #faf6f0;
+  /* card's color */
+  --card-color: #fef4ce;
+  --tag-color: #ffffff;
+  /* pig's color */
+  --border-color: #ff8b94;
+  --background-pig: #f4abba;
 }
 
 * {

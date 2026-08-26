@@ -1,0 +1,39 @@
+/* стили для мобильной версии */
+.container {
+  background-color: var(--card-color);
+  min-width: 173px;
+  min-height: 96px;
+  border-radius: 16px;
+  border: var(--border);
+}
+
+.title {
+  color: var(--text-primary);
+}
+
+.content,
+.tag {
+  color: var(--text-advanced);
+}
+
+.tag {
+  width: 42px;
+  height: 15px;
+  background-color: #ffffff;
+}
+
+/* стили для планшетной версии */
+@media (width >= 768px) {
+  .container {
+    min-width: 295px;
+    min-height: 130px;
+  }
+}
+
+/* стили для десктопной версии */
+@media (width >= 1024px) {
+  .container {
+    min-width: 295px;
+    min-height: 130px;
+  }
+}

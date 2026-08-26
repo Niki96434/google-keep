@@ -1,22 +1,9 @@
 /* стили для мобильной версии */
 .container {
+  inset: 0;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
   width: 100%;
-}
-
-/* стили для планшетной версии */
-@media (width >= 768px) {
-  .container {
-  }
-}
-
-/* стили для десктопной версии */
-@media (width >= 1024px) {
-  .container {
-  }
-}
-
-/* стили для широких экранов */
-@media (width >= 1280px) {
-  .container {
-  }
 }
