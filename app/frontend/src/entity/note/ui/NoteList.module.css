@@ -4,6 +4,7 @@
   grid-template-columns: repeat(2, minmax(173px, 1fr));
   gap: 12px;
 }
+
 /* стили для планшетной и десктопной версии */
 @media (width >= 768px) {
   .container {

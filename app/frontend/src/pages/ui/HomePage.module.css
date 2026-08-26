@@ -1,9 +1,12 @@
-/* стили для мобильной версии */
 .container {
-  inset: 0;
   display: flex;
   flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  width: 100%;
+  align-items: flex-start;
+  gap: 16px;
+}
+
+@media (width >= 1024px) {
+  .container {
+    gap: 32px;
+  }
 }
