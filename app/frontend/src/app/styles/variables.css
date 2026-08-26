@@ -21,6 +21,7 @@
   /* pig's color */
   --border-color: #ff8b94;
   --background-pig: #f4abba;
+  --shadow-color: rgba(0, 0, 0, 0.18);
 }
 
 * {
