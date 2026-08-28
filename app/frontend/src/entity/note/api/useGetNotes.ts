@@ -9,6 +9,7 @@ export const useGetNotes = () => {
       const res = await axiosInstance.get('api/v1/notes')
       return res.data
     },
+    placeholderData: { notes: [] },
   })
 
   return { data, status }

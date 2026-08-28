@@ -26,13 +26,14 @@ export const handlers = [
       ],
     })
   }),
-  http.post(`${url}/api/v1/notes`, () => {
+  http.post(`${url}/api/v1/notes`, async ({ request }) => {
+    const requestBody = await request.json()
+
     return HttpResponse.json({
       note: {
-        id: '01928d73-d8ed-7211-a314-7081d763282a',
-        user_id: 'deepseek-28d73-d8ed-7211-a314-7081d763382d',
-        title: 'Заметка 4',
-        content: 'Содержимое четвёртой заметки',
+        id: '01928d73-d8ed-7211-a314-7081d763282b',
+        user_id: 'deepseek-28d73-d8ed-7211-a314-7081d763282d',
+        requestBody,
       },
     })
   }),
