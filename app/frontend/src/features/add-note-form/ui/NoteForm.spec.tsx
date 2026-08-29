@@ -17,9 +17,9 @@ describe('integration tests for NoteForm', () => {
       </div>
     )
 
-    const firstInput = screen.getByPlaceholderText(/заметка/i)
+    const input = screen.getByPlaceholderText(/заметка/i)
 
-    await user.click(firstInput)
+    await user.click(input)
 
     const firstTextarea = await screen.findByPlaceholderText(/название/i)
     const secondTextarea = await screen.findByPlaceholderText(/заметка/i)
@@ -32,13 +32,10 @@ describe('integration tests for NoteForm', () => {
     await user.type(secondTextarea, textNote)
     expect(secondTextarea).toHaveValue(textNote)
 
+    let requestBody: unknown = null
     server.use(
       http.post('*/api/v1/notes', async ({ request }) => {
-        const requestBody = await request.json()
-        expect(requestBody).toMatchObject({
-          title: titleNote,
-          content: textNote,
-        })
+        requestBody = await request.json()
         return HttpResponse.json({
           note: {
             id: '01928d73-d8ed-7211-a314-7081d763282b',
@@ -48,14 +45,21 @@ describe('integration tests for NoteForm', () => {
         })
       })
     )
+
     await user.click(button)
 
-    const closedForm = screen.queryByPlaceholderText(/название/i)
-    expect(closedForm).not.toBeInTheDocument()
+    expect(requestBody).toMatchObject({
+      title: titleNote,
+      content: textNote,
+    })
 
-    // await user.click(firstInput)
-    // expect(firstTextarea).toHaveValue('')
-    // expect(secondTextarea).toHaveValue('')
+    await waitFor(() => {
+      expect(screen.queryByPlaceholderText(/название/i)).not.toBeInTheDocument()
+    })
+
+    await user.click(screen.getByPlaceholderText(/заметка/i))
+    expect(await screen.findByPlaceholderText(/название/i)).toHaveValue('')
+    expect(await screen.findByPlaceholderText(/заметка/i)).toHaveValue('')
   })
 
   it('should submit and close the form when clicking on everything except the form', async () => {
@@ -65,9 +69,9 @@ describe('integration tests for NoteForm', () => {
       </div>
     )
 
-    const firstInput = screen.getByPlaceholderText(/заметка/i)
+    const input = screen.getByPlaceholderText(/заметка/i)
 
-    await user.click(firstInput)
+    await user.click(input)
 
     const firstTextarea = await screen.findByPlaceholderText(/название/i)
     const secondTextarea = await screen.findByPlaceholderText(/заметка/i)
@@ -103,11 +107,14 @@ describe('integration tests for NoteForm', () => {
       })
     })
 
-    expect(screen.queryByPlaceholderText(/название/i)).not.toBeInTheDocument()
+    await waitFor(() => {
+      expect(screen.queryByPlaceholderText(/название/i)).not.toBeInTheDocument()
+    })
 
-    // await user.click(firstInput)
-    // expect(firstTextarea).toHaveValue('')
-    // expect(secondTextarea).toHaveValue('')
+    await user.click(await screen.findByPlaceholderText(/заметка/i))
+
+    expect(await screen.findByPlaceholderText(/название/i)).toHaveValue('')
+    expect(await screen.findByPlaceholderText(/заметка/i)).toHaveValue('')
   })
 
   it.todo('should not submit the form if the form fields are empty', () => {})
