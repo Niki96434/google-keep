@@ -1,4 +1,4 @@
-import { describe, it, expect } from 'vitest'
+import { describe, it, expect, vi } from 'vitest'
 import { screen, waitFor } from '@testing-library/react'
 import { NoteForm } from './NoteForm'
 import { renderWithProviders } from '@/shared/lib/test-utils'
@@ -48,10 +48,12 @@ describe('integration tests for NoteForm', () => {
 
     await user.click(button)
 
-    expect(requestBody).toMatchObject({
-      title: titleNote,
-      content: textNote,
-    })
+    await waitFor(() =>
+      expect(requestBody).toMatchObject({
+        title: titleNote,
+        content: textNote,
+      })
+    )
 
     await waitFor(() => {
       expect(screen.queryByPlaceholderText(/название/i)).not.toBeInTheDocument()
@@ -117,7 +119,37 @@ describe('integration tests for NoteForm', () => {
     expect(await screen.findByPlaceholderText(/заметка/i)).toHaveValue('')
   })
 
-  it.todo('should not submit the form if the form fields are empty', () => {})
+  it('should not submit the form if the form fields are empty', async () => {
+    const { user } = renderWithProviders(
+      <div data-testid="background">
+        <NoteForm />
+      </div>
+    )
 
-  it.todo('should submit the form if 1 fields is filled in', () => {})
+    server.use(
+      http.post('*/api/v1/notes', async () => {
+        requestSpy()
+      })
+    )
+
+    const textarea = await screen.findByPlaceholderText(/заметка/i)
+    await user.click(textarea)
+
+    const firstFormTextArea = await screen.findByPlaceholderText(/название/i)
+    const secondFormTextArea = await screen.findByPlaceholderText(/заметка/i)
+
+    expect(firstFormTextArea).toBeInTheDocument()
+    expect(secondFormTextArea).toBeInTheDocument()
+
+    const background = screen.getByTestId(/background/)
+    await user.click(background)
+
+    const requestSpy = vi.fn()
+
+    expect(requestSpy).toHaveBeenCalledTimes(0)
+  })
+
+  it.todo('should submit the form if 1 fields is filled in', () => {
+    // проверить ушло ли тело запроса
+  })
 })
