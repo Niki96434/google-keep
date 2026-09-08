@@ -3,7 +3,7 @@ import { NoteList } from './NoteList'
 import { screen, waitFor } from '@testing-library/react'
 import { server } from '@/shared/api/msw/node'
 import { HttpResponse, http } from 'msw'
-import { renderWithProviders } from '@/shared/lib/test-utils'
+import { renderWithProviders } from '@/shared/utils/test-utils'
 
 describe('NoteList', () => {
   it('should display error message on server error', async () => {

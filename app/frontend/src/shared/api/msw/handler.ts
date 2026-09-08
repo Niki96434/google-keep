@@ -7,19 +7,19 @@ export const handlers = [
       notes: [
         {
           id: '01928d73-d8ed-7211-a314-7081d763271c',
-          user_id: 'gpt-1201928d73-d8ed-7211-a314-7081d763271d',
+          user_id: '123-1201928d73-d8ed-7211-a314-7081d763271d',
           title: 'Заметка 1',
           content: 'Содержимое первой заметки',
         },
         {
           id: '01928d73-d8ed-7211-a314-7081d763271b',
-          user_id: 'codex-28d73-d8ed-7211-a314-7081d763271d',
+          user_id: '12345-28d73-d8ed-7211-a314-7081d763271d',
           title: 'Заметка 2',
           content: 'Содержимое второй заметки',
         },
         {
           id: '01928d73-d8ed-7211-a314-7081d763271a',
-          user_id: 'deepseek-28d73-d8ed-7211-a314-7081d763271d',
+          user_id: '12345678-28d73-d8ed-7211-a314-7081d763271d',
           title: 'Заметка 3',
           content: 'Содержимое третьей заметки',
         },
@@ -32,7 +32,7 @@ export const handlers = [
     return HttpResponse.json({
       note: {
         id: '01928d73-d8ed-7211-a314-7081d763282b',
-        user_id: 'deepseek-28d73-d8ed-7211-a314-7081d763282d',
+        user_id: '12345678-28d73-d8ed-7211-a314-7081d763282d',
         requestBody,
       },
     })
