@@ -12,8 +12,9 @@ MVP веб-приложение с виртуальным питомцем, ос
 
 ## Документация
 
-Описание решения: [docs/SOLUTION.md](https://github.com/Niki96434/google-keep/blob/front/app/docs/SOLUTION.md)\
-Пользовательский путь: [docs/RULES.md](https://github.com/Niki96434/google-keep/blob/front/app/docs/RULES.md)
+- Описание решения: [docs/SOLUTION.md](https://github.com/Niki96434/google-keep/blob/front/app/docs/SOLUTION.md)
+- Пользовательский путь: [docs/RULES.md](https://github.com/Niki96434/google-keep/blob/front/app/docs/RULES.md)
+- Тестирование[doc/TESTING.md](https://github.com/Niki96434/google-keep/blob/front/app/docs/TESTING.md)
 
 ## Перечень используемых технологий (с их обоснованием)
 
@@ -34,7 +35,7 @@ MVP веб-приложение с виртуальным питомцем, ос
 
 ## Особенности реализации
 
-## Доп функционал(интеграция ИИ, auth, docker)
+## Доп функционал(интеграция ИИ, auth)
 
 ## Декомпозиция(архитектура и API)
 

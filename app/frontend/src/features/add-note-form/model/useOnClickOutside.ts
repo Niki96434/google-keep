@@ -1,12 +1,12 @@
 import { useEffect, useRef, type RefObject } from 'react'
 
-interface OnClickOutside<T extends HTMLElement = HTMLElement> {
+export interface OnClickOutside<T extends HTMLElement = HTMLElement> {
   formRef: RefObject<T | null>
   onSubmit: () => void
   isOpenForm: boolean
 }
 
-type EventType = MouseEvent | TouchEvent
+type EventType = PointerEvent
 
 export function useOnClickOutside({ formRef, onSubmit, isOpenForm }: OnClickOutside) {
   const onSubmitRef = useRef(onSubmit)
@@ -23,9 +23,9 @@ export function useOnClickOutside({ formRef, onSubmit, isOpenForm }: OnClickOuts
       onSubmitRef.current()
     }
     if (isOpenForm) {
-      document.addEventListener('mousedown', listener)
+      document.addEventListener('pointerdown', listener)
       return () => {
-        document.removeEventListener('mousedown', listener)
+        document.removeEventListener('pointerdown', listener)
       }
     }
   }, [formRef, isOpenForm])

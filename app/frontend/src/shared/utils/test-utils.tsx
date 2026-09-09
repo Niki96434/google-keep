@@ -14,6 +14,10 @@ export const renderWithProviders = (ui: React.ReactElement) => {
   })
   return {
     user,
-    ...render(<QueryClientProvider client={client}>{ui}</QueryClientProvider>),
+    ...render(
+      <QueryClientProvider client={client}>
+        {<div data-testid="background">{ui}</div>}
+      </QueryClientProvider>
+    ),
   }
 }

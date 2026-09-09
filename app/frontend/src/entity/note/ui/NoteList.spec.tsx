@@ -15,7 +15,7 @@ describe('NoteList', () => {
     renderWithProviders(<NoteList />)
 
     const errorMessage = await screen.findByText(/ошибка загрузки/i)
-    expect(errorMessage).toBeInTheDocument()
+    await waitFor(() => expect(errorMessage).toBeInTheDocument())
   })
 
   it('should render list of notes on successful response', async () => {
