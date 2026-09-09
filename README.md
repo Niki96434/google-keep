@@ -14,11 +14,11 @@ MVP веб-приложение с виртуальным питомцем, ос
 
 - Описание решения: [docs/SOLUTION.md](https://github.com/Niki96434/google-keep/blob/front/app/docs/SOLUTION.md)
 - Пользовательский путь: [docs/RULES.md](https://github.com/Niki96434/google-keep/blob/front/app/docs/RULES.md)
-- Тестирование[doc/TESTING.md](https://github.com/Niki96434/google-keep/blob/front/app/docs/TESTING.md)
+- Тестирование: [doc/TESTING.md](https://github.com/Niki96434/google-keep/blob/front/app/docs/TESTING.md)
 
 ## Перечень используемых технологий (с их обоснованием)
 
-- React 19, Typescript, Vite, Eslint, Prettier, Vitest, RTL, RTQuery, Zod
+- React 19, Typescript, Vite, Eslint, Prettier, Vitest, RTL, MSW, RTQuery, Zod
 - Express.js, Supertest, Drizzle ORM
 - PostgreSQL 18
 
@@ -48,7 +48,7 @@ MVP веб-приложение с виртуальным питомцем, ос
 
 ## История коммитов
 
-## Скриншоты
+## Дизайн
 
 ### Главный экран
 
@@ -56,3 +56,5 @@ MVP веб-приложение с виртуальным питомцем, ос
 ![Мобильный](https://github.com/Niki96434/google-keep/blob/front/app/docs/screenshots/pigkeep-mobile.pdf)
 
 ### Модальное окно сводки за день
+
+## Скриншоты

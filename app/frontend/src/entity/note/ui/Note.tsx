@@ -10,10 +10,13 @@ import {
   DropdownMenuSeparator,
   DropdownMenuTrigger,
 } from '@/shared/ui/menu/dropdown-menu'
+import { useDeleteNoteMutation } from '../api/useDeleteNoteMutation'
 
-type NoteProps = Pick<Note, 'title' | 'content'>
+type NoteProps = Pick<Note, 'id' | 'title' | 'content'>
 
-export function Note({ title, content }: NoteProps) {
+export function Note({ id, title, content }: NoteProps) {
+  const mutation = useDeleteNoteMutation()
+
   return (
     <div className={styles.container}>
       <p className={styles.title}>{title}</p>
@@ -35,9 +38,13 @@ export function Note({ title, content }: NoteProps) {
           </DropdownMenuGroup>
           <DropdownMenuSeparator />
           <DropdownMenuGroup>
-            <DropdownMenuItem variant="destructive">
+            <DropdownMenuItem
+              variant="destructive"
+              onClick={() => mutation.mutate(id)}
+              disabled={mutation.isPending}
+            >
               <TrashIcon />
-              Удалить
+              {mutation.isPending ? 'Удаление...' : 'Удалить'}
             </DropdownMenuItem>
           </DropdownMenuGroup>
         </DropdownMenuContent>

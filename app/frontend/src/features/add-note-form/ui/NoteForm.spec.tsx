@@ -47,19 +47,6 @@ describe('integration tests for NoteForm', () => {
   const textNote = 'Содержимое четвёртой заметки'
 
   describe('user triggers', () => {
-    it.skip('should and close the form when clicking outside', async () => {
-      const { user, firstTextarea, secondTextarea, background } = await setupForm()
-
-      expect(firstTextarea).toBeInTheDocument()
-      expect(secondTextarea).toBeInTheDocument()
-
-      await user.click(background)
-
-      await waitFor(() => {
-        expect(screen.queryByPlaceholderText(/название/i)).not.toBeInTheDocument()
-      })
-    })
-
     it('should submit and close the form by clicking on the button', async () => {
       const { user, firstTextarea, secondTextarea } = await setupForm()
 
