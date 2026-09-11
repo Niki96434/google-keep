@@ -1,9 +1,9 @@
-import { QueryClientProvider, QueryClient } from '@tanstack/react-query'
-import { render } from '@testing-library/react'
-import userEvent from '@testing-library/user-event'
+import { QueryClientProvider, QueryClient } from '@tanstack/react-query';
+import { render } from '@testing-library/react';
+import userEvent from '@testing-library/user-event';
 
 export const renderWithProviders = (ui: React.ReactElement) => {
-  const user = userEvent.setup()
+  const user = userEvent.setup();
   const testQueryClient = new QueryClient({
     defaultOptions: {
       queries: {
@@ -11,7 +11,7 @@ export const renderWithProviders = (ui: React.ReactElement) => {
         refetchOnWindowFocus: false,
       },
     },
-  })
+  });
   return {
     user,
     ...render(
@@ -19,5 +19,5 @@ export const renderWithProviders = (ui: React.ReactElement) => {
         {<div data-testid="background">{ui}</div>}
       </QueryClientProvider>
     ),
-  }
-}
+  };
+};

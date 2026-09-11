@@ -1,6 +1,6 @@
-import { http, HttpResponse } from 'msw'
+import { http, HttpResponse } from 'msw';
 
-const url = `http://localhost:${import.meta.env.VITE_SERVER_PORT}`
+const url = `http://localhost:${import.meta.env.VITE_SERVER_PORT}`;
 export const handlers = [
   http.get(`${url}/api/v1/notes`, () => {
     return HttpResponse.json({
@@ -24,10 +24,10 @@ export const handlers = [
           content: 'Содержимое третьей заметки',
         },
       ],
-    })
+    });
   }),
   http.post(`${url}/api/v1/notes`, async ({ request }) => {
-    const requestBody = await request.json()
+    const requestBody = await request.json();
 
     return HttpResponse.json({
       note: {
@@ -35,6 +35,6 @@ export const handlers = [
         user_id: '12345678-28d73-d8ed-7211-a314-7081d763282d',
         requestBody,
       },
-    })
+    });
   }),
-]
+];

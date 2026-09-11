@@ -1,9 +1,9 @@
-import { Button, Textarea } from '@/shared/ui'
-import { Controller } from 'react-hook-form'
-import { useNoteFormLogic } from './../model/useNoteFormLogic'
+import { Button, Textarea } from '@/shared/ui';
+import { Controller } from 'react-hook-form';
+import { useNoteFormLogic } from './../model/useNoteFormLogic';
 
 function NoteForm() {
-  const { formRef, isOpenForm, openForm, handleSubmit, onSubmit, control } = useNoteFormLogic()
+  const { formRef, isOpenForm, openForm, handleSubmit, onSubmit, control } = useNoteFormLogic();
 
   return (
     <div ref={formRef} className="w-full max-w-150 mx-auto my-8 text-left">
@@ -52,7 +52,7 @@ function NoteForm() {
         </form>
       )}
     </div>
-  )
+  );
 }
 
-export { NoteForm }
+export { NoteForm };

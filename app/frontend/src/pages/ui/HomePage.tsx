@@ -1,6 +1,6 @@
-import { NoteForm } from '@/features/add-note-form/ui/NoteForm'
-import styles from './HomePage.module.css'
-import { NoteList } from '@/entity/note/ui/NoteList'
+import { NoteForm } from '@/features/add-note-form/ui/NoteForm';
+import styles from './HomePage.module.css';
+import { NoteList } from '@/entity/note/ui/NoteList';
 
 export function HomePage() {
   return (
@@ -8,5 +8,5 @@ export function HomePage() {
       <NoteForm />
       <NoteList />
     </div>
-  )
+  );
 }

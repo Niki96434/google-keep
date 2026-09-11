@@ -1,32 +1,32 @@
-import { useEffect, useRef, type RefObject } from 'react'
+import { useEffect, useRef, type RefObject } from 'react';
 
 export interface OnClickOutside<T extends HTMLElement = HTMLElement> {
-  formRef: RefObject<T | null>
-  onSubmit: () => void
-  isOpenForm: boolean
+  formRef: RefObject<T | null>;
+  onSubmit: () => void;
+  isOpenForm: boolean;
 }
 
-type EventType = PointerEvent
+type EventType = PointerEvent;
 
 export function useOnClickOutside({ formRef, onSubmit, isOpenForm }: OnClickOutside) {
-  const onSubmitRef = useRef(onSubmit)
+  const onSubmitRef = useRef(onSubmit);
 
   useEffect(() => {
-    onSubmitRef.current = onSubmit
-  }, [onSubmit])
+    onSubmitRef.current = onSubmit;
+  }, [onSubmit]);
 
   useEffect(() => {
     const listener = (event: EventType) => {
       if (!formRef.current || formRef.current.contains(event.target as Node)) {
-        return
+        return;
       }
-      onSubmitRef.current()
-    }
+      onSubmitRef.current();
+    };
     if (isOpenForm) {
-      document.addEventListener('pointerdown', listener)
+      document.addEventListener('pointerdown', listener);
       return () => {
-        document.removeEventListener('pointerdown', listener)
-      }
+        document.removeEventListener('pointerdown', listener);
+      };
     }
-  }, [formRef, isOpenForm])
+  }, [formRef, isOpenForm]);
 }

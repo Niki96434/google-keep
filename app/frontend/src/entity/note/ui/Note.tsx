@@ -1,7 +1,7 @@
-import type { Note } from '@shared/notes/types'
-import styles from './Note.module.css'
-import menuIcon from './../assets/three-dots.png'
-import { PencilIcon, TrashIcon } from 'lucide-react'
+import type { Note } from '@shared/notes/types';
+import styles from './Note.module.css';
+import menuIcon from './../assets/three-dots.png';
+import { PencilIcon, TrashIcon } from 'lucide-react';
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -9,23 +9,23 @@ import {
   DropdownMenuItem,
   DropdownMenuSeparator,
   DropdownMenuTrigger,
-} from '@/shared/ui/menu/dropdown-menu'
-import { useDeleteNoteMutation } from '../api/useDeleteNoteMutation'
-import { useMutation } from '@tanstack/react-query'
-import { axiosInstance, queryClient } from '@/shared/api'
+} from '@/shared/ui/menu/dropdown-menu';
+import { useDeleteNoteMutation } from '../api/useDeleteNoteMutation';
+import { useMutation } from '@tanstack/react-query';
+import { axiosInstance, queryClient } from '@/shared/api';
 
-type NoteProps = Pick<Note, 'id' | 'title' | 'content'>
+type NoteProps = Pick<Note, 'id' | 'title' | 'content'>;
 
 function useEditNoteMutation() {
   return useMutation({
     mutationFn: (id: Note['id']) => axiosInstance.put(`/api/v1/notes/${id}`),
     onSuccess: () => queryClient.invalidateQueries({ queryKey: ['notes'] }),
-  })
+  });
 }
 
 export function Note({ id, title, content }: NoteProps) {
-  const editMutation = useEditNoteMutation()
-  const delMutation = useDeleteNoteMutation()
+  const editMutation = useEditNoteMutation();
+  const delMutation = useDeleteNoteMutation();
 
   return (
     <div className={styles.container}>
@@ -34,7 +34,7 @@ export function Note({ id, title, content }: NoteProps) {
       <DropdownMenu>
         <DropdownMenuTrigger
           render={
-            <button className={styles.wrapper}>
+            <button type="button" className={styles.wrapper}>
               <img src={menuIcon} className={styles.menu} alt="Меню заметки" />
             </button>
           }
@@ -63,5 +63,5 @@ export function Note({ id, title, content }: NoteProps) {
         </DropdownMenuContent>
       </DropdownMenu>
     </div>
-  )
+  );
 }
