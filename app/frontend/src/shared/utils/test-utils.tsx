@@ -4,18 +4,18 @@ import userEvent from '@testing-library/user-event'
 
 export const renderWithProviders = (ui: React.ReactElement) => {
   const user = userEvent.setup()
-  const client = new QueryClient({
+  const testQueryClient = new QueryClient({
     defaultOptions: {
       queries: {
-        gcTime: Infinity,
         retry: false,
+        refetchOnWindowFocus: false,
       },
     },
   })
   return {
     user,
     ...render(
-      <QueryClientProvider client={client}>
+      <QueryClientProvider client={testQueryClient}>
         {<div data-testid="background">{ui}</div>}
       </QueryClientProvider>
     ),

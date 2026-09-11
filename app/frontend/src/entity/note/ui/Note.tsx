@@ -11,11 +11,21 @@ import {
   DropdownMenuTrigger,
 } from '@/shared/ui/menu/dropdown-menu'
 import { useDeleteNoteMutation } from '../api/useDeleteNoteMutation'
+import { useMutation } from '@tanstack/react-query'
+import { axiosInstance, queryClient } from '@/shared/api'
 
 type NoteProps = Pick<Note, 'id' | 'title' | 'content'>
 
+function useEditNoteMutation() {
+  return useMutation({
+    mutationFn: (id: Note['id']) => axiosInstance.put(`/api/v1/notes/${id}`),
+    onSuccess: () => queryClient.invalidateQueries({ queryKey: ['notes'] }),
+  })
+}
+
 export function Note({ id, title, content }: NoteProps) {
-  const mutation = useDeleteNoteMutation()
+  const editMutation = useEditNoteMutation()
+  const delMutation = useDeleteNoteMutation()
 
   return (
     <div className={styles.container}>
@@ -31,20 +41,23 @@ export function Note({ id, title, content }: NoteProps) {
         />
         <DropdownMenuContent>
           <DropdownMenuGroup>
-            <DropdownMenuItem>
+            <DropdownMenuItem
+              onClick={() => editMutation.mutate(id)}
+              disabled={editMutation.isPending}
+            >
               <PencilIcon />
-              Редактировать
+              {editMutation.isPending ? 'Редактируется...' : 'Редактировать'}
             </DropdownMenuItem>
           </DropdownMenuGroup>
           <DropdownMenuSeparator />
           <DropdownMenuGroup>
             <DropdownMenuItem
               variant="destructive"
-              onClick={() => mutation.mutate(id)}
-              disabled={mutation.isPending}
+              onClick={() => delMutation.mutate(id)}
+              disabled={delMutation.isPending}
             >
               <TrashIcon />
-              {mutation.isPending ? 'Удаление...' : 'Удалить'}
+              {delMutation.isPending ? 'Удаление...' : 'Удалить'}
             </DropdownMenuItem>
           </DropdownMenuGroup>
         </DropdownMenuContent>

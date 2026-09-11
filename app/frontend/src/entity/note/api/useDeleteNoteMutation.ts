@@ -5,7 +5,9 @@ import type { Note } from '@shared/notes/types'
 
 export function useDeleteNoteMutation() {
   return useMutation({
-    mutationFn: (noteId: Note['id']) => axiosInstance.delete(`/api/v1/notes/${noteId}`),
+    mutationFn: (noteId: Note['id']): Promise<void> => {
+      return axiosInstance.delete(`/api/v1/notes/${noteId}`)
+    },
     onSuccess: () => queryClient.invalidateQueries({ queryKey: ['notes'] }),
   })
 }

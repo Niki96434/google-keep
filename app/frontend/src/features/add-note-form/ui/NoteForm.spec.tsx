@@ -1,11 +1,9 @@
-import { describe, it, expect, vi } from 'vitest'
 import { screen, waitFor } from '@testing-library/react'
 import { NoteForm } from './NoteForm'
 import { renderWithProviders } from '@/shared/utils/test-utils'
 import { http, HttpResponse } from 'msw'
 import { server } from '@/shared/api/msw/node'
 import type { NoteCreateIn } from '@shared/notes/types'
-import '@testing-library/jest-dom'
 
 async function setupForm() {
   const { user } = renderWithProviders(<NoteForm />)
